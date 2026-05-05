@@ -2,9 +2,9 @@
 
 <img src="https://raw.githubusercontent.com/Devopstrio/.github/main/assets/Browser_logo.png" height="150" alt="Policy-as-Code Library Logo" />
 
-<h1>Policy-as-Code Library</h1>
+<h1>Policy-as-Code Library Platform</h1>
 
-<p><strong>The Strategic Governance Repository for Reusable, Modular, and Versioned Enterprise Policies</strong></p>
+<p><strong>The Strategic Governance Repository for Reusable, Modular, and Versioned Enterprise Policies.</strong></p>
 
 [![Standard: OPA](https://img.shields.io/badge/Standard-OPA-emerald.svg?style=for-the-badge&labelColor=000000)]()
 [![Status: Production--Ready](https://img.shields.io/badge/Status-Production--Ready-emerald.svg?style=for-the-badge&labelColor=000000)]()
@@ -13,7 +13,7 @@
 <br/>
 
 > **"Code is Law."** 
-> Policy-as-Code Library is an enterprise-grade governance system designed to unify security, compliance, and operational rules into a single source of truth. By treating policies as modular code components, it enables automated enforcement across infrastructure (Terraform), runtime (Kubernetes), and delivery (CI/CD). It bridges the gap between complex regulatory frameworks (NIST, CIS, PCI) and real-world technical implementation through a unified, versioned, and testable policy model.
+> **Policy-as-Code Library** is an enterprise-grade governance system designed to unify security, compliance, and operational rules into a single source of truth. It enables automated enforcement across infrastructure (Terraform), runtime (Kubernetes), and delivery (CI/CD) pipelines.
 
 </div>
 
@@ -21,615 +21,259 @@
 
 ## 🏛️ Executive Summary
 
-Traditional governance often relies on static PDF documents and manual audits, leading to inconsistent enforcement, security gaps, and "Compliance Theatre."
+Traditional governance often relies on static PDF documents and manual audits, leading to inconsistent enforcement, security gaps, and "Compliance Theatre." Organizations often fail to secure their environments because policy requirements are disconnected from the actual engineering workflows, creating significant friction and regulatory risk.
 
-This platform provides the **Governance Control Plane**. It utilizes a robust **Policy Engine** to evaluate resources against modular **Policy Libraries**. Every policy is mapped to industry standards like **NIST 800-53** or **CIS Benchmarks**, providing real-time visibility into the organization's risk posture. With support for both **Preventive** (blocking non-compliant changes) and **Detective** (monitoring and alerting) modes, it ensures that institutional guardrails are enforced consistently across every cloud account and cluster.
-
----
-
-## 📉 The "Governance Gap" Problem
-
-Without a centralized policy-as-code library, organizations face:
-- **Policy Inconsistency**: Different security rules applied in AWS vs Azure, or Dev vs Prod, because of manual configuration.
-- **Audit Friction**: Spending weeks manually collecting evidence for auditors instead of having a continuous, real-time compliance score.
-- **Lack of Enforcement**: Security "Best Practices" that are ignored because they aren't integrated into the deployment pipeline.
-- **Policy Drift**: Environments that were compliant at creation but have drifted over time without being detected.
+This platform provides the **Governance Control Plane**. It implements a complete **Policy-as-Code Lifecycle Framework**, enabling Security and Compliance teams to manage institutional guardrails as a first-class citizen. By automating the evaluation of resources against versioned libraries and orchestrating real-time admission control, we ensure that every organizational asset is compliant by default, audited for history, and resilient against policy drift.
 
 ---
 
-## 🚀 Strategic Drivers & Business Outcomes
+## 📐 Architecture Storytelling: Principal Reference Models
 
-### 🎯 Strategic Drivers
-- **Modular Policy Authoring**: Creating reusable policy fragments that can be composed into complex domain-specific guardrails.
-- **Multi-Framework Mapping**: Automatically tagging policies with CIS, NIST, and ISO controls to simplify multi-regulation compliance.
-- **Continuous Enforcement**: Integrating policy checks into GitOps and CI/CD workflows to catch violations before they reach production.
+### 1. Principal Architecture: Global Policy-as-Code Governance & Enforcement Plane
+This diagram illustrates the end-to-end flow from policy authoring and testing to multi-engine distribution, CI/CD gating, runtime enforcement, and institutional auditing.
 
-### 💰 Business Outcomes
-- **100% Compliance Visibility**: Real-time dashboards provide executive-level insights into the organization's adherence to global standards.
-- **90% Faster Audit Readiness**: Continuous evidence collection and policy versioning make audits a "non-event."
-- **Zero-Trust Implementation**: Enforcing least-privilege and security baselines by default across all infrastructure and applications.
+```mermaid
+graph LR
+    %% Subgraph Definitions
+    subgraph PolicyDesign["Policy Design & Authoring"]
+        direction TB
+        Author["Policy Authoring IDE"]
+        Tests["Unit & Integration Tests"]
+        Version["Semantic Versioning (Git)"]
+    end
 
----
+    subgraph IntelligenceEngine["Governance Intelligence Hub"]
+        direction TB
+        API["FastAPI Policy Gateway"]
+        Translator["Multi-Engine Translator (OPA/Sentinel)"]
+        Simulator["Policy Impact Simulator (Dry-Run)"]
+        Registry["Central Policy Registry"]
+    end
 
-## 📐 Architecture Storytelling: 80+ Advanced Diagrams
+    subgraph EnforcementPlane["Enforcement & Gating Hub"]
+        direction TB
+        CICD["CI/CD Pipeline Gate"]
+        AdmCtrl["K8s Admission Controller"]
+        CloudScan["Real-time Cloud Scanner"]
+    end
 
-### 1. The Policy Evaluation Architecture
-*The lifecycle of a policy from authoring to enforcement.*
+    subgraph OperationsHub["Institutional Compliance Hub"]
+        direction TB
+        Scorecard["Compliance Posture Scorecard"]
+        Violation["Violation Remediation Hub"]
+        Audit["Forensic Policy Lake"]
+    end
+
+    subgraph DevOps["Governance-as-Code Orchestration"]
+        direction TB
+        TF["Terraform Policy Modules"]
+        OPA["OPA Policy Agent (WASM/Binary)"]
+        Baseline["Dynamic Security Baselines"]
+    end
+
+    %% Flow Arrows
+    PolicyDesign -->|1. Register Policy| API
+    API -->|2. Translate Logic| Translator
+    Translator -->|3. Simulate Impact| Simulator
+    Simulator -->|4. Publish Bundle| Registry
+    
+    Registry -->|5. Enforce Gate| CICD
+    Registry -->|6. Validate Admission| AdmCtrl
+    Registry -->|7. Audit State| CloudScan
+    
+    API -->|8. Visualize Health| Scorecard
+    Scorecard -->|9. Manage Violations| Violation
+    Scorecard -->|10. Gather Evidence| Audit
+    
+    TF -->|11. Provision Hub| IntelligenceEngine
+    OPA -->|12. Execute Local| CICD
+    Baseline -->|13. Map to Controls| Registry
+
+    %% Styling
+    classDef design fill:#f5f5f5,stroke:#616161,stroke-width:2px;
+    classDef intel fill:#e0f2f1,stroke:#004d40,stroke-width:2px;
+    classDef enforcement fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef ops fill:#f3e5f5,stroke:#4a148c,stroke-width:2px;
+    classDef devops fill:#fffde7,stroke:#f57f17,stroke-width:2px;
+
+    class PolicyDesign design;
+    class IntelligenceEngine intel;
+    class EnforcementPlane enforcement;
+    class OperationsHub ops;
+    class DevOps devops;
+```
+
+### 2. The Policy Lifecycle Management Flow
+The continuous path of a policy from initial authoring and testing to versioned distribution, multi-mode enforcement, and forensic auditing.
+
+```mermaid
+graph LR
+    Author["Author & Test"] --> Distribute["Versioned Distribute"]
+    Distribute --> Enforce["Preventive/Detective Mode"]
+    Enforce --> Audit["Forensic Compliance Audit"]
+```
+
+### 3. CI/CD Policy Gate Orchestration
+Shifting security left by integrating automated policy checks into the software delivery pipeline to block non-compliant infrastructure and application changes.
+
+```mermaid
+graph LR
+    Commit["Git Commit"] --> Pipeline["CI/CD Pipeline"]
+    Pipeline --> Gate["Policy Gate (OPA)"]
+    Gate -->|Violation| Block["Block Build"]
+    Gate -->|Clean| Deploy["Deploy to Production"]
+```
+
+### 4. Multi-Engine Policy Translation Hub
+Bridging multiple policy frameworks (OPA Rego, HashiCorp Sentinel, Cloud Custodian) into a unified management plane for enterprise-wide governance.
+
 ```mermaid
 graph TD
-    subgraph "Policy Control Plane"
-        Portal[Governance Portal]
-        Library[Policy Library]
-        Engine[Policy Engine]
-        Version[Version Manager]
-    end
-
-    subgraph "Enforcement Points"
-        Terraform[IaC (Terraform)]
-        K8s[Kubernetes (Admission)]
-        CICD[CI/CD Pipelines]
-    end
-
-    subgraph "Compliance Frameworks"
-        NIST[NIST 800-53]
-        CIS[CIS Benchmarks]
-        PCI[PCI-DSS]
-    end
-
-    Library -->|Map| NIST & CIS & PCI
-    Portal -->|Author| Library
-    Library -->|Distribute| Enforcement Points
-    
-    Enforcement Points -->|Request Eval| Engine
-    Engine -->|Results| Portal
+    Hub["Policy Hub"] --> OPA["OPA (Terraform/K8s)"]
+    Hub --> Sentinel["Sentinel (Terraform Cloud)"]
+    Hub --> Custodian["Custodian (AWS/Azure Ops)"]
 ```
 
-### 2. The Enforcement Mode Loop
-*Preventive (Block) vs Detective (Notify).*
+### 5. Policy-as-Code vs. Traditional GRC Flow
+Evolution from manual, document-heavy audits to automated, continuous verification that provides real-time compliance attestation.
+
+```mermaid
+graph LR
+    Manual["Traditional GRC (Manual/Static)"] --> Arrow["Modernization"]
+    Arrow --> PAC["Policy-as-Code (Automated/Live)"]
+```
+
+### 6. Real-time Admission Control & Enforcement
+Validating resources at the point of creation within Kubernetes or Cloud environments to ensure that only compliant assets are provisioned.
+
+```mermaid
+graph LR
+    Req["Resource Request"] --> Webhook["Admission Webhook"]
+    Webhook --> Eval["Policy Evaluation"]
+    Eval -->|Denied| Reject["Rejected by Policy"]
+    Eval -->|Allowed| Active["Resource Created"]
+```
+
+### 7. Institutional Compliance Scorecard
+Grading organizational performance based on key indicators: Regulatory Adherence (NIST/CIS), Violation Density, and Remediation Velocity.
+
 ```mermaid
 graph TD
-    Resource[New Resource Request] --> Policy{Match Policy?}
-    Policy -->|Yes| Mode{Enforcement Mode?}
-    
-    Mode -->|Preventive| EvalP[Evaluate]
-    EvalP -->|Fail| Block[BLOCK: Return 403 / Fail Pipeline]
-    EvalP -->|Pass| Exec[Allow Execution]
-    
-    Mode -->|Detective| EvalD[Evaluate]
-    EvalD -->|Fail| Notify[NOTIFY: Alert SRE / Log Violation]
-    EvalD -->|Pass| Exec
+    Post["Compliance Posture: 97%"] --> Risk["Critical Violation: 3%"]
+    Post --- C1["NIST 800-53 (98%)"]
+    Post --- C2["CIS Benchmarks (95%)"]
 ```
 
-### 3. Compliance Framework Mapping Logic
-*Connecting technical rules to regulatory controls.*
-```mermaid
-graph LR
-    P[Policy: No Public S3] --> C1[CIS Control 1.2.1]
-    P --> C2[NIST Control AC-3]
-    P --> C3[PCI Requirement 1.3]
-    
-    C1 & C2 & C3 --> Dashboard[Enterprise Compliance Scorecard]
-```
-
-### 4. Policy Versioning & Lifecycle
-```mermaid
-graph LR
-    Draft[Draft v1.1.0-alpha] --> Review[Peer Review]
-    Review --> Test[Policy Unit Tests]
-    Test -->|Pass| Publish[Publish v1.1.0]
-    Publish --> Deprecated[Deprecate v1.0.0]
-```
-
-### 5. Multi-Tenant Policy Isolation
-```mermaid
-graph LR
-    subgraph "Tenant: Finance"
-        PolF[Finance Policies]
-    end
-    subgraph "Tenant: HR"
-        PolH[HR Policies]
-    end
-    
-    PolF & PolH --> Hub[Policy Library Hub]
-    Hub -->|RBAC Filter| Engine[Evaluation Engine]
-```
-
-### 6. Pipeline Guardrail Integration
-```mermaid
-graph LR
-    Git[Git Commit] --> Build[Build & Lint]
-    Build --> Eval[Policy Evaluation]
-    Eval -->|Violation| Fail[Fail Build]
-    Eval -->|Clean| Deploy[Deploy to Cluster]
-```
-
-### 7. Cloud: Resource-specific baseline
-```mermaid
-graph LR
-    C[Clou] --> R[Reso]
-```
-
-### 8. K8s: Admission controller hook
-```mermaid
-graph LR
-    K[K8s] --> A[Admi]
-```
-
-### 9. CICD: Supply chain security policy
-```mermaid
-graph LR
-    C[CICD] --> S[Supp]
-```
-
-### 10. Security: Zero-Trust identity policy
-```mermaid
-graph LR
-    S[Secu] --> Z[Zero]
-```
-
-### 11. Framework: CIS Benchmark Mapper
-```mermaid
-graph LR
-    F[Fram] --> C[CISB]
-```
-
-### 12. Framework: NIST 800-53 catalog
-```mermaid
-graph LR
-    F[Fram] --> N[NIST]
-```
-
-### 13. Framework: PCI-DSS v4.0 mapping
-```mermaid
-graph LR
-    F[Fram] --> P[PCID]
-```
-
-### 14. Metadata: Tagging & Labels
-```mermaid
-graph LR
-    M[Meta] --> T[Tagg]
-```
-
-### 15. Metadata: Version history log
-```mermaid
-graph LR
-    M[Meta] --> V[Vers]
-```
-
-### 16. Enforcement: Blocking webhooks
-```mermaid
-graph LR
-    E[Enfo] --> B[Bloc]
-```
-
-### 17. Enforcement: Periodic drift scan
-```mermaid
-graph LR
-    E[Enfo] --> P[Peri]
-```
-
-### 18. Integration: Terraform Plan Eval
-```mermaid
-graph LR
-    I[Inte] --> T[Terr]
-```
-
-### 19. Integration: Cloudtrail/Audit sync
-```mermaid
-graph LR
-    I[Inte] --> C[Clou]
-```
-
-### 20. Monitoring: Policy success metric
-```mermaid
-graph LR
-    M[Moni] --> P[Poli]
-```
-
-### 21. Infrastructure: Postgres Metadata DB
-```mermaid
-graph LR
-    I[Infr] --> P[Post]
-```
-
-### 22. Infrastructure: Redis Eval Cache
-```mermaid
-graph LR
-    I[Infr] --> R[Redi]
-```
-
-### 23. Infrastructure: K8s Governance Namespace
-```mermaid
-graph LR
-    I[Infr] --> K[K8sG]
-```
-
-### 24. Worker: Async evaluator
-```mermaid
-graph LR
-    W[Work] --> A[Asyn]
-```
-
-### 25. Worker: Violation notifier
-```mermaid
-graph LR
-    W[Work] --> V[Viol]
-```
-
-### 26. Worker: Drift detector
-```mermaid
-graph LR
-    W[Work] --> D[Drif]
-```
-
-### 27. API: Policy CRUD
-```mermaid
-graph LR
-    A[API] --> P[Poli]
-```
-
-### 28. API: Compliance aggregation
-```mermaid
-graph LR
-    A[API] --> C[Comp]
-```
-
-### 29. API: Violation search
-```mermaid
-graph LR
-    A[API] --> V[Viol]
-```
-
-### 30. Frontend: Library Explorer UI
-```mermaid
-graph LR
-    F[Fron] --> L[Libr]
-```
-
-### 31. Frontend: Compliance Heatmap
-```mermaid
-graph LR
-    F[Fron] --> C[Comp]
-```
-
-### 32. Frontend: Policy Authoring IDE
-```mermaid
-graph LR
-    F[Fron] --> P[Poli]
-```
-
-### 33. Policy: Tagging requirement
-```mermaid
-graph LR
-    P[Poli] --> T[Tagg]
-```
-
-### 34. Policy: Encryption-at-rest
-```mermaid
-graph LR
-    P[Poli] --> E[Encr]
-```
-
-### 35. Policy: No public ingress
-```mermaid
-graph LR
-    P[Poli] --> N[NoPu]
-```
-
-### 36. Policy: MFA requirement
-```mermaid
-graph LR
-    P[Poli] --> M[MFAr]
-```
-
-### 37. Logic: Evaluation rule-set
-```mermaid
-graph LR
-    L[Logi] --> E[Eval]
-```
-
-### 38. Logic: Risk score calculator
-```mermaid
-graph LR
-    L[Logi] --> R[Risk]
-```
-
-### 39. Logic: Version conflict resolver
-```mermaid
-graph LR
-    L[Logi] --> V[Vers]
-```
-
-### 40. Template: New cloud policy
-```mermaid
-graph LR
-    T[Temp] --> N[NewC]
-```
-
-### 41. Template: Policy unit test
-```mermaid
-graph LR
-    T[Temp] --> P[Poli]
-```
-
-### 42. Alert: Policy critical breach
-```mermaid
-graph LR
-    A[Aler] --> P[Poli]
-```
-
-### 43. Alert: Compliance drop detected
-```mermaid
-graph LR
-    A[Aler] --> C[Comp]
-```
-
-### 44. Scalability: Horizontal eval worker
-```mermaid
-graph LR
-    S[Scal] --> H[Hori]
-```
-
-### 45. Performance: OPA binary caching
-```mermaid
-graph LR
-    P[Perf] --> O[OPAB]
-```
-
-### 46. Reliability: Multi-AZ Governance
-```mermaid
-graph LR
-    R[Reli] --> M[Mult]
-```
-
-### 47. Security: RBAC policy management
-```mermaid
-graph LR
-    S[Secu] --> R[RBAC]
-```
-
-### 48. Security: Signed policy bundles
-```mermaid
-graph LR
-    S[Secu] --> S[Sign]
-```
-
-### 49. Cost: Policy-driven FinOps
-```mermaid
-graph LR
-    C[Cost] --> P[Poli]
-```
-
-### 50. Devops: CI/CD policy validation
-```mermaid
-graph LR
-    D[Devo] --> C[CICD]
-```
-
-### 51. Workflow: Policy change request
-```mermaid
-graph LR
-    W[Work] --> P[Poli]
-```
-
-### 52. Workflow: Emergency policy bypass
-```mermaid
-graph LR
-    W[Work] --> E[Emer]
-```
-
-### 53. Workflow: Quarterly audit export
-```mermaid
-graph LR
-    W[Work] --> Q[Quar]
-```
-
-### 54. Workflow: Automated remediation
-```mermaid
-graph LR
-    W[Work] --> A[Auto]
-```
-
-### 55. Component: Policy Engine
-```mermaid
-graph LR
-    C[Comp] --> P[Poli]
-```
-
-### 56. Component: Validation Engine
-```mermaid
-graph LR
-    C[Comp] --> V[Vali]
-```
-
-### 57. Component: Governance Engine
-```mermaid
-graph LR
-    C[Comp] --> G[Gove]
-```
-
-### 58. Data Model: Policy Entity
-```mermaid
-graph LR
-    D[Data] --> P[Poli]
-```
-
-### 59. Data Model: Framework Entity
-```mermaid
-graph LR
-    D[Data] --> F[Fram]
-```
-
-### 60. Data Model: Violation Record
-```mermaid
-graph LR
-    D[Data] --> V[Viol]
-```
-
-### 61. Logic: Weighted Framework Score
-```mermaid
-graph LR
-    L[Logi] --> W[Weig]
-```
-
-### 62. Logic: Policy bundle packager
-```mermaid
-graph LR
-    L[Logi] --> P[Poli]
-```
-
-### 63. Logic: Compliance drift logic
-```mermaid
-graph LR
-    L[Logi] --> C[Comp]
-```
-
-### 64. Logic: Resource type matcher
-```mermaid
-graph LR
-    L[Logi] --> R[Reso]
-```
-
-### 65. UI: Sidebar navigation
-```mermaid
-graph LR
-    U[UI] --> S[Side]
-```
-
-### 66. UI: Violation detail panel
-```mermaid
-graph LR
-    U[UI] --> V[Viol]
-```
-
-### 67. UI: Framework coverage chart
-```mermaid
-graph LR
-    U[UI] --> F[Fram]
-```
-
-### 68. UI: Policy version diff
-```mermaid
-graph LR
-    U[UI] --> P[Poli]
-```
-
-### 69. UI: Real-time evaluation feed
-```mermaid
-graph LR
-    U[UI] --> R[Real]
-```
-
-### 70. UI: Compliance heatmap view
-```mermaid
-graph LR
-    U[UI] --> C[Comp]
-```
+### 8. Identity & RBAC for Policy Ops
+Managing fine-grained access to policy authoring, enforcement settings, and violation data between authors and security auditors.
 
-### 71. SRE: Disaster recovery audit
 ```mermaid
-graph LR
-    S[SRE] --> D[Disa]
+graph TD
+    Author["Policy Author"] --> Edit["Create & Test Rules"]
+    Auditor["Security Auditor"] --> Review["Verify Compliance Logs"]
+    Admin["Ops Lead"] --> Mode["Set Enforcement Mode"]
 ```
 
-### 72. SRE: Governance node pressure
-```mermaid
-graph LR
-    S[SRE] --> G[Gove]
-```
+### 9. Policy Impact Assessment (PIA) Flow
+Evaluating the potential impact of new or modified policies against historical resource data (Dry-Run) to prevent production friction.
 
-### 73. SRE: Automated backup policy
 ```mermaid
 graph LR
-    S[SRE] --> A[Auto]
+    New["New Policy"] --> Sim["Dry-Run Simulator"]
+    Sim --> Data["Historical Resources"]
+    Data --> Impact["Projected Violation Report"]
 ```
 
-### 74. Arch: Modular Policy model
-```mermaid
-graph LR
-    A[Arch] --> M[Modu]
-```
+### 10. IaC Deployment: Governance-as-Code Framework
+Using Terraform to deploy and manage the versioned distribution of the policy engine, registry, and admission control infrastructure.
 
-### 75. Arch: Multi-cloud bridge
 ```mermaid
 graph LR
-    A[Arch] --> M[Mult]
+    HCL["Infrastructure Code"] --> TF["Terraform Apply"]
+    TF --> Engine["Governance Control Plane"]
+    Engine --> Gates["Enforcement Gates"]
 ```
 
-### 76. Arch: Governance-first design
-```mermaid
-graph LR
-    A[Arch] --> G[Gove]
-```
+### 11. Metadata Lake for Forensic Policy Audit
+Storing long-term records of every policy evaluation, decision reason, and violation event for institutional investigation and audit.
 
-### 77. Feature: Policy simulation mode
 ```mermaid
 graph LR
-    F[Feat] --> P[Poli]
+    Eval["Evaluation Event"] --> Stream["Forensic Stream"]
+    Stream --> Lake["Policy Metadata Lake"]
+    Lake --> Trends["Compliance Drift Trends"]
 ```
 
-### 78. Feature: Third-party integration
-```mermaid
-graph LR
-    F[Feat] --> T[Thir]
-```
+---
 
-### 79. Feature: AI policy authoring
-```mermaid
-graph LR
-    F[Feat] --> A[AIpo]
-```
+## 🏛️ Core Governance Pillars
 
-### 80. Enterprise Governance Maturity
-```mermaid
-graph LR
-    E[Entr] --> G[Gove]
-```
+1.  **Modular Policy Authoring**: Creating reusable policy fragments that can be composed into domain-specific guardrails.
+2.  **Multi-Framework Mapping**: Automatically tagging policies with CIS, NIST, and ISO controls for simplified compliance.
+3.  **Continuous Enforcement**: Integrating policy checks into CI/CD and GitOps workflows to catch violations early.
+4.  **Preventive & Detective Modes**: Offering both blocking (preventive) and alerting (detective) enforcement options.
+5.  **Policy Testing Hub**: Ensuring policy accuracy through unit tests and impact simulations before distribution.
+6.  **Full Auditability**: Immutable recording of every evaluation and policy version for institutional record-keeping.
 
 ---
 
 ## 🛠️ Technical Stack & Implementation
 
 ### Policy Engine & APIs
-- **Framework**: Python 3.11+ / FastAPI.
-- **Evaluation Core**: Custom Python engine for JSON/YAML rule processing (simulating OPA).
-- **Queue**: Redis for asynchronous policy evaluations and drift detection tasks.
-- **Persistence**: PostgreSQL for policy metadata, framework mappings, and violation history.
-- **Identity**: OIDC integration for federated governance management.
+*   **Framework**: Python 3.11+ / FastAPI.
+*   **Evaluation Engine**: Multi-mode engine for JSON/YAML rule processing with support for WASM-based OPA bundles.
+*   **Translator Hub**: Logic for mapping regulatory frameworks (NIST, CIS) to specific technical policy rules.
+*   **Admission Hub**: Real-time webhook integration for Kubernetes and cloud-native resource validation.
+*   **State Management**: PostgreSQL (Metadata Lake) and Redis (Policy Cache).
 
-### Frontend (Policy Dashboard)
-- **Framework**: React 18 / Vite.
-- **Theme**: Dark, Slate, Emerald (Enterprise governance aesthetic).
-- **Visualization**: Recharts for compliance trajectory and framework coverage.
+### Policy Dashboard (UI)
+*   **Framework**: React 18 / Vite.
+*   **Theme**: Dark, Slate, Emerald (Enterprise governance aesthetic).
+*   **Visualization**: Recharts for compliance trajectory, framework coverage, and violation heatmaps.
 
-### Infrastructure
-- **Runtime**: AWS EKS (Kubernetes).
-- **Deployment**: Helm charts for policy library distribution.
-- **IaC**: Terraform (Modular with Governance focus).
+### Infrastructure & DevOps
+*   **Runtime**: AWS EKS or Azure Kubernetes Service (AKS).
+*   **IaC**: Modular Terraform for deploying the governance hub and enforcement gate distributions.
+
+---
+
+## 🏗️ IaC Mapping (Module Structure)
+
+| Module | Purpose | Real Services |
+| :--- | :--- | :--- |
+| **`infrastructure/gov_hub`** | Central management plane | EKS, PostgreSQL, Redis |
+| **`infrastructure/gates`** | CI/CD and Admission gates | Lambda, Gatekeeper, OPA |
+| **`infrastructure/scanners`** | Real-time drift detectors | AWS Config, Azure Policy |
+| **`infrastructure/auditing`** | Forensic governance sinks | S3, Athena, Quicksight |
 
 ---
 
 ## 🚀 Deployment Guide
 
-### Local Development
+### Local Principal Environment
 ```bash
-# Clone the repository
+# Clone the policy platform
 git clone https://github.com/devopstrio/policy-as-code-library.git
 cd policy-as-code-library
 
-# Setup environment
+# Configure environment
 cp .env.example .env
 
-# Launch the governance stack (API, Engine, DB, Redis, UI)
+# Launch the Governance stack
 make up
 
-# Run a mock policy evaluation
+# Run a mock policy evaluation simulation
 make evaluate-mock
 ```
+
 Access the Policy Dashboard at `http://localhost:3000`.
 
 ---
 
 ## 📜 License
 Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+<div align="center">
+  <p>© 2026 Devopstrio. All rights reserved.</p>
+</div>
